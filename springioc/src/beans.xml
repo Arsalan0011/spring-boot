@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:annotation-config/>
+    
+<bean id="sim" class="com.spring.ioc.Jazz"></bean>
+
+<bean id="mathCheat" class="com.spring.di.MathCheat"></bean>
+
+<!-- Using mathcheat class object in student class -->
+<bean id="student" class="com.spring.di.Student">
+<property name="studentName" value="Arsalan"></property>
+<property name="studentId" value="1"></property>
+<property name="mathCheat" ref="mathCheat">
+
+</property>
+
+</bean>
+
+<bean id="Asad" class="com.spring.di.Student">
+<constructor-arg name="studentName" value="Asad" />
+<constructor-arg name="studentId" value="2" />
+</bean>
+
+
+<!-- Autowire byName and byType -->
+<bean id="heart" class="com.spring.autowiring.Heart" autowire="byName"></bean>
+<bean id="human" class="com.spring.autowiring.Human"></bean>
+
+
+<!-- This tag is used for using annotations in the class -->
+<context:annotation-config/>
+
+<!-- This tag is used for loading the properties file  -->
+<context:property-placeholder location="classpath:student-info.properties" />
+
+<!-- injecting the values from properties file -->
+<bean id="std" class="com.spring.annotation.Student">
+<property name="name" value="${std.name}"></property>
+	
+
+</bean>
+
+
+</beans>
